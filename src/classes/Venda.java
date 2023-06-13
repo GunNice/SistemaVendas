@@ -1,17 +1,24 @@
 package classes;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Venda {
-    private Date dataVenda;
+    private LocalDate dataVenda;
     private String produtoVendido;
     private int qtdVenda;
 
+    public Venda(LocalDate dataVenda, String produtoVendido, int qtdVenda) {
+        this.dataVenda = dataVenda;
+        this.produtoVendido = produtoVendido;
+        this.qtdVenda = qtdVenda;
+    }
+
     
-    public Date getDataVenda() {
+    public LocalDate getDataVenda() {
         return dataVenda;
     }
-    public void setDataVenda(Date dataVenda) {
+    public void setDataVenda(LocalDate dataVenda) {
         this.dataVenda = dataVenda;
     }
     public String getProdutoVendido() {

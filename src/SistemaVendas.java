@@ -109,6 +109,58 @@ public class SistemaVendas {
             System.out.println("\n\nTecle enter para Voltar ao menu");
             sc.nextLine();
             }
+            if (opcao == 5) {
+                // Realizar venda
+                System.out.println("========== Realizar Venda ==========");
+
+                System.out.print("Digite o código ou nome do produto a ser vendido: ");
+                String consultaProduto = sc.nextLine();
+
+                Produto produtoVenda = null;
+                for (Produto produto : listaProdutos) {
+                    if (produto.getCodigoProduto().equalsIgnoreCase(consultaProduto)
+                            || produto.getNomeProduto().equalsIgnoreCase(consultaProduto)) {
+                        produtoVenda = produto;
+                        break;
+                    }
+                }
+
+                if (produtoVenda != null) {
+                    // Verificar estoque
+                    System.out.print("Digite a quantidade a ser vendida: ");
+                    int quantidadeVenda = sc.nextInt();
+
+                    if (quantidadeVenda <= produtoVenda.getQtdEstoque()) {
+                        // Atualizar estoque
+                        produtoVenda.setQtdEstoque(produtoVenda.getQtdEstoque() - quantidadeVenda);
+
+                        // Registrar venda
+                        Venda venda = new Venda(LocalDate.now(), produtoVenda.getNomeProduto(), quantidadeVenda);
+                        listaVendas.add(venda);
+
+                        // Calcular o valor total da venda
+                        double valorTotal = produtoVenda.getValorProduto() * quantidadeVenda;
+
+                        // Mostrar o resumo da venda na tela
+                        System.out.println("\n===== Resumo da Venda =====");
+                        System.out.println("Código do Produto: " + produtoVenda.getCodigoProduto());
+                        System.out.println("Produto: " + produtoVenda.getNomeProduto());
+                        System.out.println("Quantidade: " + quantidadeVenda);
+                        System.out.println("Valor Total: " + valorTotal);
+                        System.out.println("===========================\n");
+
+                    
+                    } else {
+                        System.out.println("Estoque insuficiente para realizar a venda.");
+                    }
+                } else {
+                    System.out.println("Produto não cadastrado. Venda não realizada.");
+                }
+
+                System.out.println("====================================");
+                System.out.println("======= Venda Finalizada =======");
+                System.out.println("====================================\n");
+            }
 
           
 
